@@ -14,11 +14,11 @@ int main(){
     Mat imgGray, imgBlur, imgCanny, imgDil, imgErode;
 
     cvtColor(img,imgGray, COLOR_BGR2GRAY); // Converting image to grayscale
-    GaussianBlur(img,imgBlur,Size(3,3),3,0); // Introduces Gaussian blur to the image 
+    GaussianBlur(imgGray,imgBlur,Size(3,3),3,0); // Introduces Gaussian blur to the image 
     Canny(imgBlur,imgCanny,25, 75); // Finds edges using the Canny algorithm (common practice is to use blurred images when performing edge detection)
 
     Mat kernel = getStructuringElement(MORPH_RECT, Size(3,3)); // the shape is MORPH_RECT(rectangular) and the size is 5x5 (if the size is increased, it will dilate more, and if we decrease it, it will dilate less, USE ODD NUMBERS ONLY) ==> We created a kernel that we can use with dialation
-    dilate(imgCanny,imgDil,kernel); // increasing the thickness of the edges
+    dilate(imgCanny,imgDil,kernel); // increasing the thickness of the edges (to remove the gaps from the edges in the Canny image)
     erode(imgDil,imgErode,kernel);  // decreasing the thickness of the edges
 
     imshow("Image",img);

@@ -20,12 +20,12 @@ int main(){
     cvtColor(img, imgHSV, COLOR_BGR2HSV); 
 
     namedWindow("Trackbars",(640,200)); // created the window for trackbar
-    createTrackbar("Hue Min", "Trackbars", &hmin, 179); // The maximum value for Hue is 180
-    createTrackbar("Hue Max", "Trackbars", &hmax, 179); // The maximum value for Hue is 180
-    createTrackbar("Sat Min", "Trackbars", &smin, 255); // The maximum value for Hue is 180
-    createTrackbar("Sat Max", "Trackbars", &smax, 255); // The maximum value for Hue is 180
-    createTrackbar("Val Min", "Trackbars", &vmin, 255); // The maximum value for Hue is 180
-    createTrackbar("Val Max", "Trackbars", &vmax, 255); // The maximum value for Hue is 180
+    createTrackbar("Hue Min", "Trackbars", &hmin, 179); // The maximum number of value for Hue is 180
+    createTrackbar("Hue Max", "Trackbars", &hmax, 179); // The maximum number of value for Hue is 180
+    createTrackbar("Sat Min", "Trackbars", &smin, 255); // The maximum number of value for Saturation is 256
+    createTrackbar("Sat Max", "Trackbars", &smax, 255); // The maximum number of value for Saturation is 256
+    createTrackbar("Val Min", "Trackbars", &vmin, 255); // The maximum number of value for Value is 256
+    createTrackbar("Val Max", "Trackbars", &vmax, 255); // The maximum number of value for Value is 256
 
     while (true) { // When we create trackbars, we must use while loops
 
