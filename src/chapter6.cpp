@@ -6,31 +6,41 @@
 using namespace std;
 using namespace cv;
 
-//////////////////// WARP PERSPECTIVES ////////////////////
+//////////////////// COLOR DETECTION ////////////////////
 int main(){
 
-    float w = 250, h =350; // the size of a card is 2.5in x 3.5in. So, to keep the same aspect ratio, width = 250 and height = 350
-
-    Mat matrix, imgWarp;
-
-    string path = "Resources/cards.jpg";
+    Mat imgHSV, mask;
+    int hmin = 0, smin = 0, vmin = 0;   // values found earlier
+    int hmax = 179, smax = 255, vmax = 255;  // values found earlier - A track bar will be created to directly change these values and find the color
+    
+    string path = "Resources/shapes.png";
     Mat img = imread(path); //Mat is a matrix data-type introduced by openCV to handle images
     
-    Point2f src[4] = {{529,142}, {771,190}, {405,395}, {674,457}};  // the function we are going to use requires floating points. This is why Point2f was used.
-                                                                    // these are the 4 corner points of the king card collected from the image
-    Point2f dst[4] = {{0.0f,0.0f}, {w, 0.0f}, {0.0f, h}, {w,h}}; // destination points
+    // Converting the image to HSV (Hue Saturation Value) space because it will be much easier to find the color that way
+    cvtColor(img, imgHSV, COLOR_BGR2HSV); 
 
-    matrix = getPerspectiveTransform(src,dst);
-    warpPerspective(img,imgWarp,matrix,Point(w,h));
+    namedWindow("Trackbars",(640,200)); // created the window for trackbar
+    createTrackbar("Hue Min", "Trackbars", &hmin, 179); // The maximum value for Hue is 180
+    createTrackbar("Hue Max", "Trackbars", &hmax, 179); // The maximum value for Hue is 180
+    createTrackbar("Sat Min", "Trackbars", &smin, 255); // The maximum value for Hue is 180
+    createTrackbar("Sat Max", "Trackbars", &smax, 255); // The maximum value for Hue is 180
+    createTrackbar("Val Min", "Trackbars", &vmin, 255); // The maximum value for Hue is 180
+    createTrackbar("Val Max", "Trackbars", &vmax, 255); // The maximum value for Hue is 180
 
-    // drawing circles on the selected pixels
-    for (int i = 0; i<4; i++)
-    {
-        circle(img, src[i], 10, Scalar(0, 0, 255), FILLED);
+    while (true) { // When we create trackbars, we must use while loops
+
+        Scalar lower(hmin, smin, vmin);
+        Scalar upper(hmax, smax, vmax);
+
+        // Once converted, we will use the inRange function to find the color 
+        inRange(imgHSV, lower, upper, mask); // mask is out new image
+
+        imshow("Image",img);
+        imshow("Image HSV",imgHSV);
+        imshow("Image Mask",mask);
+
+        waitKey(1);
     }
 
-    imshow("Image",img);
-    imshow("Image Warped",imgWarp);
-    waitKey(0);
-    return 0;
+    return 0; 
 }
