@@ -34,6 +34,9 @@ add_executable (chapter0 src/chapter0.cpp)
 add_executable (chapter1 src/chapter1.cpp)
 add_executable (chapter2 src/chapter2.cpp)
 add_executable (chapter3 src/chapter3.cpp)
+add_executable (chapter4 src/chapter4.cpp)
+add_executable (chapter5 src/chapter5.cpp)
+add_executable (chapter6 src/chapter6.cpp)
 
 # Link the executable to the Hello library. Since the Hello library has
 # public include directories we will use those link directories when building
@@ -43,3 +46,6 @@ target_link_libraries( chapter0 ${OpenCV_LIBS} )
 target_link_libraries( chapter1 ${OpenCV_LIBS} )
 target_link_libraries( chapter2 ${OpenCV_LIBS} )
 target_link_libraries( chapter3 ${OpenCV_LIBS} )
+target_link_libraries( chapter4 ${OpenCV_LIBS} )
+target_link_libraries( chapter5 ${OpenCV_LIBS} )
+target_link_libraries( chapter6 ${OpenCV_LIBS} )

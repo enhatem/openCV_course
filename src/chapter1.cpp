@@ -8,7 +8,7 @@ using namespace cv;
 
 //////////////////// IMPORTING IMAGES ////////////////////
 // int main(){
-//     string path = "Resources/glysa_pic.jpeg";
+//     string path = "Resources/test.png";
 //     Mat img = imread(path); //Mat is a matrix data-type introduced by openCV to handle images
 //     imshow("Image",img);
 //     waitKey(0);
